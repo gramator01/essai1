@@ -1,7 +1,37 @@
 language: bash
 before_install:
 - sudo apt-get update
-- sudo apt-get install -y --no-install-recommends texlive-full latexmk
+- sudo apt-get install -y -qq
+           build-essential
+           latex-make
+           texlive-base
+           texlive-xetex
+           texlive-latex-recommended
+           texlive-latex-extra
+           texlive-extra-utils
+           texlive-fonts-recommended
+           texlive-font-utils
+           texlive-lang-french
+           texlive-math-extra
+           texlive-pictures
+           latex-xcolor
+           texlive-bibtex-extra
+           pgf
+           lmodern
+           biber
+           latexmk
+           ghostscript
+
 install: true
 script:
-- make
+  - make
+
+deploy:
+  local-dir: build
+  provider: pages
+  target-branch: gh-pages
+  skip-cleanup: true
+  github-token: "$GITHUB_TOKEN"
+env:
+  global:
+    secure: 
